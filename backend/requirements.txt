@@ -1,0 +1,6 @@
+flask~=2.2.5
+pyjwt~=2.8.0
+bcrypt~=3.2.0
+python-keycloak
+flask_cors
+flask_pymongo
