@@ -28,5 +28,5 @@ spec:
                   name: db-secret
                   key: db-password
           volumeMounts:
-            - name: postgres-volume
+            - name: postgres-volume-claim
               mountPath: /var/lib/postgresql/data

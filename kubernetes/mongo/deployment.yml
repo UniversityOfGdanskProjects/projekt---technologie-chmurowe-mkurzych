@@ -18,5 +18,5 @@ spec:
           ports:
             - containerPort: 27017
           volumeMounts:
-            - name: mongo-volume
+            - name: mongo-volume-claim
               mountPath: /data/db
