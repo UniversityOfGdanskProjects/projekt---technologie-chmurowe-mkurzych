@@ -140,9 +140,9 @@ Pewna firma - "Innovatech Inc." - zauważyła potrzebę kompleksowego rozwiązan
 
 \subsection{Opis architektury}
 \label{sec:introduction}
-Architektura aplikacji "AuthMaster" jest oparta na Kubernetes - klastrowym systemie zarządzania kontenerami, który zapewnia skalowalność i wysoką dostępność. Kluczowe komponenty to:
+Architektura aplikacji "AuthMaster" jest oparta na Kubernetes\cite{kubernetes} - klastrowym systemie zarządzania kontenerami, który zapewnia skalowalność i wysoką dostępność.
 
-React stanowi interfejs użytkownika, który komunikuje się z API Flask. Flask jest serwerem backendowym obsługującym logikę aplikacji i zarządzającym sesjami użytkowników. MongoDB to baza danych NoSQL, która przechowuje informacje o użytkownikach. Keycloak działa jako serwer tożsamości, zarządzając autoryzacją i uwierzytelnianiem, a jego konfiguracja jest przechowywana w bazie danych PostgreSQL. Kubernetes jest platformą do zarządzania wdrażaniem kontenerów Docker, zapewniającą skalowanie i monitoring.
+React stanowi interfejs użytkownika, który komunikuje się z API Flask. Flask jest serwerem backendowym obsługującym logikę aplikacji i zarządzającym sesjami użytkowników. MongoDB to baza danych NoSQL, która przechowuje informacje o użytkownikach. Keycloak\cite{keycloak} działa jako serwer tożsamości, zarządzając autoryzacją i uwierzytelnianiem, a jego konfiguracja jest przechowywana w bazie danych PostgreSQL. Kubernetes jest platformą do zarządzania wdrażaniem kontenerów Docker\cite{docker}, zapewniającą skalowanie i monitoring.
 
 Kubernetes to open-source'owa platforma do zarządzania kontenerami, która automatyzuje wiele procesów związanych z wdrażaniem, skalowaniem i operacjami aplikacji kontenerowych. Kubernetes jest wyjątkowo elastyczny i umożliwia łatwe zarządzanie dużymi aplikacjami w różnych środowiskach.
 
