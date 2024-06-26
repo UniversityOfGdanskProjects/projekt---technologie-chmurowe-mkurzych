@@ -10,23 +10,23 @@ import os
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
-PORT = os.getenv("PORT") | 5000
-DATABASE_URL = os.getenv("DATABASE_URL") | "mongodb://localhost:27017/myDatabase"
+PORT = os.getenv("PORT")
+DATABASE_URL = "mongodb://localhost:27017/myDatabase"
 
 # MongoDB configuration
 app.config["MONGO_URI"] = DATABASE_URL
 mongo = PyMongo(app)
 
 # Keycloak configuration
-KEYCLOAK_SERVER_URL = os.getenv("KEYCLOAK_SERVER_URL") | 'http://localhost:8080/'
-KEYCLOAK_REALM_NAME = os.getenv("KEYCLOAK_REALM_NAME") | 'demo-realm'
-KEYCLOAK_CLIENT_ID = os.getenv("KEYCLOAK_CLIENT_ID") | 'flask-app'
-KEYCLOAK_CLIENT_SECRET = os.getenv("KEYCLOAK_CLIENT_SECRET") | 'FqXzK17tw7L2POkIRHFkxB5q1ajnoh3a'
-KEYCLOAK_ADMIN_USERNAME = os.getenv("KEYCLOAK_ADMIN_USERNAME") | 'admin'
-KEYCLOAK_ADMIN_PASSWORD = os.getenv("KEYCLOAK_ADMIN_PASSWORD") | 'admin'
+KEYCLOAK_SERVER_URL = 'http://localhost:8080/'
+KEYCLOAK_REALM_NAME = 'demo-realm'
+KEYCLOAK_CLIENT_ID = 'flask-app'
+KEYCLOAK_CLIENT_SECRET = 'FqXzK17tw7L2POkIRHFkxB5q1ajnoh3a'
+KEYCLOAK_ADMIN_USERNAME = 'admin'
+KEYCLOAK_ADMIN_PASSWORD = 'admin'
 
 # Secret key for JWT encoding/decoding
-SECRET_KEY = os.getenv("SECRET_KEY") | "tajnehaslo123"
+SECRET_KEY = "tajnehaslo123"
 
 keycloak_openid = KeycloakOpenID(server_url=KEYCLOAK_SERVER_URL,
                                  realm_name=KEYCLOAK_REALM_NAME,
