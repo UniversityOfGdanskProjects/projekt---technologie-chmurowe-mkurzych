@@ -85,17 +85,17 @@
 \rhead{\hmwkAuthorName} % Top left header
 \lhead{\hmwkClass: \hmwkTitle} % Top center header
 \rhead{\firstxmark} % Top right header
-\lfoot{Jan Kowalski} % Bottom left footer
+\lfoot{Marta Kurzych} % Bottom left footer
 \cfoot{} % Bottom center footer
 \rfoot{} % Bottom right footer
 \renewcommand{\headrulewidth}{1pt}
 \renewcommand{\footrulewidth}{1pt}
 
     
-\newcommand{\hmwkTitle}{Tytuł projektu z technologii chmurowych} % Tytuł projektu
+\newcommand{\hmwkTitle}{AuthMaster} % Tytuł projektu
 \newcommand{\hmwkDueDate}{\today} % Data 
 \newcommand{\hmwkClass}{Technologie chmurowe} % Nazwa przedmiotu
-\newcommand{\hmwkAuthorName}{Jan Kowalski} % Imię i nazwisko
+\newcommand{\hmwkAuthorName}{Marta Kurzych} % Imię i nazwisko
 
 % trabalho 
 \begin{document}
@@ -136,52 +136,76 @@
 \section{Opis projektu}
 \label{sec:Project}
 
-Tutaj wypisujemy szczegółowe informacje o celu powstania projektu (jakaś historyjka, że pewna firma/osoba potrzebuje bazy, która ...)
+Pewna firma - "Innovatech Inc." - zauważyła potrzebę kompleksowego rozwiązania do zarządzania użytkownikami i ich autoryzacją w ramach swoich aplikacji webowych. Potrzebowali bazy, która integruje nowoczesne technologie, aby zapewnić niezawodność, skalowalność i bezpieczeństwo. Tak powstał projekt "AuthMaster" - nowatorski system autoryzacji oparty na połączeniu React, Flask, MongoDB, Keycloak oraz Kubernetes. Dodatkowo, do przechowywania konfiguracji Keycloak używany jest PostgreSQL. Dzięki tej architekturze firma może sprawnie zarządzać użytkownikami, bezpiecznie przechowywać dane oraz łatwo skalować aplikację zgodnie z rosnącymi potrzebami.
 
-\subsection{Opis architektury - 8 pkt}
+\subsection{Opis architektury}
 \label{sec:introduction}
-Powinna zawierać opis architektury aplikacji opartej na Kubernetes, w tym opis klastrowego systemu zarządzania kontenerami, wykorzystanych modułów i komponentów
+Architektura aplikacji "AuthMaster" jest oparta na Kubernetes\cite{kubernetes} - klastrowym systemie zarządzania kontenerami, który zapewnia skalowalność i wysoką dostępność.
+
+React stanowi interfejs użytkownika, który komunikuje się z API Flask. Flask jest serwerem backendowym obsługującym logikę aplikacji i zarządzającym sesjami użytkowników. MongoDB to baza danych NoSQL, która przechowuje informacje o użytkownikach. Keycloak\cite{keycloak} działa jako serwer tożsamości, zarządzając autoryzacją i uwierzytelnianiem, a jego konfiguracja jest przechowywana w bazie danych PostgreSQL. Kubernetes jest platformą do zarządzania wdrażaniem kontenerów Docker\cite{docker}, zapewniającą skalowanie i monitoring.
+
+Kubernetes to open-source'owa platforma do zarządzania kontenerami, która automatyzuje wiele procesów związanych z wdrażaniem, skalowaniem i operacjami aplikacji kontenerowych. Kubernetes jest wyjątkowo elastyczny i umożliwia łatwe zarządzanie dużymi aplikacjami w różnych środowiskach.
 
 
-\subsection{Opis infrastruktury - 6 pkt}
+\subsection{Opis infrastruktury}
 \label{sec:Users}
 
-Powinien zawierać informacje na temat środowiska, w którym aplikacja będzie działać, a także wykorzystanych narzędzi i platformy chmurowe. Ważne jest również zwrócenie uwagi na wykorzystanie zasobów, takich jak sieci i pamięci masowej.
+Aplikacja "AuthMaster" działa w środowisku chmurowym, które zapewnia elastyczność i łatwość zarządzania zasobami. 
 
-\subsection{Opis komponentów aplikacji - 8 pkt}
+Kubernetes zarządza kontenerami Docker, które uruchamiają poszczególne komponenty aplikacji. Docker umożliwia tworzenie obrazów kontenerów dla React, Flask, MongoDB, Keycloak i PostgreSQL.
+
+Kubernetes zapewnia orkiestrację kontenerów, automatyczne uruchamianie, zatrzymywanie i zarządzanie kontenerami w klastrze. System ten jest samonaprawiający, co oznacza, że automatycznie ponownie uruchamia uszkodzone kontenery, wymienia je, jeśli węzeł w klastrze zawiedzie, oraz usuwa kontenery, które nie odpowiadają na zdefiniowane testy.
+
+\subsection{Opis komponentów aplikacji}
 \label{sec:FunctionalConditions}
 
-Powinna zawierać informacje na temat komponentów aplikacji, takich jak serwisy, aplikacje i bazy danych. W szczególności należy zwrócić uwagę na sposoby ich wdrażania, konfiguracji i zarządzania.
+React tworzy dynamiczny interfejs użytkownika, który komunikuje się z API Flask poprzez zapytania HTTP. Flask obsługuje rejestrację użytkowników, logowanie, zarządzanie sesjami oraz komunikację z MongoDB i Keycloak. MongoDB przechowuje dane o użytkownikach, takie jak hasła i inne informacje profilowe. Keycloak zarządza autoryzacją i uwierzytelnianiem, zapewniając mechanizmy logowania i zarządzania sesjami, a jego konfiguracja jest przechowywana w bazie danych PostgreSQL. Kubernetes orkiestruje wdrażanie i zarządzanie kontenerami, zapewniając wysoką dostępność i skalowalność.
 
-\subsection{Konfiguracja i zarządzanie - 4 pkt}
+\subsection{Konfiguracja i zarządzanie}
 \label{sec:NonFunctionalConditions}
 
-Powinna zawierać informacje na temat konfiguracji i zarządzania aplikacją na poziomie klastra Kubernetes.
+Konfiguracja i zarządzanie aplikacją odbywa się na poziomie klastra Kubernetes. Używane są pliki YAML do definiowania podów, usług, replikasetów i deploymentów. Kluczowe elementy to ConfigMaps i Secrets, które przechowują konfiguracje i dane wrażliwe w klastrze.
 
-\subsection{Zarządzanie błędami - 2 pkt}
+ConfigMapy są używane do przechowywania zmiennych środowiskowych dla backendu. ConfigMap zawiera konfiguracje, które nie są wrażliwe i mogą być łatwo zarządzane oraz aktualizowane. 
+
+Secrets są używane do przechowywania danych wrażliwych, takich jak hasło do bazy danych PostgresSQL. Są one zaszyfrowane w klastrze Kubernetes i dostępne tylko dla autoryzowanych podów.
+
+\subsection{Zarządzanie błędami}
 \label{sec:ERD} 
 
-Powinna zawierać informacje na temat sposobów zarządzania błędami aplikacji oraz sposobów monitorowania i reagowania na awarie.
+Zarządzanie błędami obejmuje kilka kluczowych aspektów, które są realizowane przy użyciu narzędzi oferowanych przez Kubernetes.
 
+W systemie Kubernetes, zarządzanie błędami rozpoczyna się od zastosowania mechanizmów Liveness i Readiness Probes, które są wykorzystywane do monitorowania stanu aplikacji.
 
-\subsection{Skalowalność - 4 pkt}
+W przypadku Keycloak, Liveness Probe sprawdza, czy aplikacja działa prawidłowo i nie zawiesiła się.  Dzięki temu, jeśli Keycloak przestanie odpowiadać, Kubernetes automatycznie ponownie uruchomi kontener, co pomaga utrzymać aplikację w stanie operacyjnym.
+
+Readiness Probe sprawdza, czy aplikacja jest gotowa do obsługi żądań. Jeśli aplikacja nie przejdzie tego testu, Kubernetes przestanie kierować do niej ruch. Dzięki Readiness Probe, Kubernetes może dynamicznie zarządzać ruchem do podów, zapewniając, że tylko zdrowe instancje są dostępne dla użytkowników.
+
+W razie poważnych awarii, Kubernetes automatycznie restartuje kontenery, które przestały działać prawidłowo. Ponadto, można ustawić odpowiednie zasady retry (powtórzenia) w kodzie aplikacji oraz na poziomie warstwy sieciowej, aby zapewnić odporność na chwilowe problemy.
+
+\subsection{Skalowalność}
 \label{sec:ExamplesSection}
 
-Skalowalność jest kluczowa w architekturze aplikacji opartej na Kubernetes. Należy opisać, jak aplikacja może być skalowana, w jaki sposób skalowanie jest monitorowane i jakie narzędzia są wykorzystywane w tym celu.
+Skalowalność aplikacji jest zapewniona dzięki Kubernetes, który umożliwia ręczne skalowanie przez ustawienie liczby replik podów na podstawie obserwacji obciążenia. Kubernetes zapewnia elastyczność, umożliwiając dostosowywanie zasobów w zależności od potrzeb firmy. Chociaż nie jest używany w obecnej konfiguracji, Kubernetes oferuje również możliwość automatycznego skalowania liczby podów w zależności od obciążenia za pomocą Horizontal Pod Autoscaler (HPA).
 
-\subsection{Wymagania dotyczące zasobów - 2 pkt}
+\subsection{Wymagania dotyczące zasobów}
 \label{sec:ExampleTables}
 
-Powinna zawierać informacje na temat wymagań dotyczących zasobów dla każdego komponentu aplikacji, takie jak ilość pamięci RAM, CPU, miejsce na dysku, itp. Należy również opisać, jakie są oczekiwania dotyczące wydajności i czasu odpowiedzi dla aplikacji.
+Każdy komponent aplikacji ma określone wymagania dotyczące zasobów. Dla React i Flask ustawiono limity zasobów na 200Mi pamięci RAM i 500m CPU. Oznacza to, że interfejs użytkownika React oraz API Flask są zoptymalizowane pod kątem niskiego zużycia zasobów, co pomaga w efektywnym zarządzaniu obciążeniem w klastrze Kubernetes.
+
+MongoDB, jako baza danych, ma wyższe wymagania dotyczące zasobów, a dla trwałego przechowywania danych używane są Persistent Volumes (PV) o pojemności 2Gi oraz Persistent Volume Claims (PVC) o pojemności 1Gi. PostgreSQL, używany do przechowywania konfiguracji Keycloak, ma podobne wymagania dotyczące zasobów: PV o pojemności 2Gi i PVC o pojemności 1Gi. Limity zasobów dla Keycloak i PostgreSQL są ustawione odpowiednio, aby zapewnić płynne działanie systemu.
 
 
-\subsection{Architektura sieciowa - 4 pkt}
+\subsection{Architektura sieciowa}
 \label{sec:ExampleResults}
 
-powinna zawierać informacje na temat architektury sieciowej aplikacji, w tym sposobu konfiguracji sieci w klastrze Kubernetes, wykorzystywanych protokołów i narzędzi do zarządzania siecią.
+Architektura sieciowa aplikacji "AuthMaster" opiera się na usługach Kubernetes, które zarządzają ruchem wewnętrznym i zewnętrznym. Wszystkie pody aplikacji mają zdefiniowane serwisy (service.yml), które umożliwiają komunikację między nimi oraz z zewnętrznymi systemami. Service działa jako stabilny punkt dostępu do aplikacji działających w podach, niezależnie od tego, na którym węźle w klastrze działają te pody.
 
-\noindent
-\textbf{Każdy odnośnik, który znajdzie się w literaturze musi mieć swoje odwołanie w projekcie. - 2 pkt} 
+Dla komponentów takich jak Keycloak, frontend (React) i backend (Flask), dodatkowo zdefiniowane są Ingressy, które zarządzają dostępem z zewnątrz do aplikacji. Ingress Controller umożliwia zarządzanie ruchem HTTP/HTTPS, zapewniając równoważenie obciążenia oraz terminację SSL.
+
+Ingress zapewnia, że ruch HTTP/HTTPS jest przekierowywany do odpowiednich usług w klastrze na podstawie zdefiniowanych reguł. W tym przypadku, wszystkie żądania skierowane do keycloak są przekierowywane do usługi Keycloak działającej na porcie 8080.
+
+Taka konfiguracja umożliwia efektywne zarządzanie ruchem, zapewnia bezpieczeństwo dzięki TLS oraz ułatwia skalowanie aplikacji poprzez dodawanie kolejnych replik podów bez potrzeby zmiany konfiguracji sieciowej.
 
 \bibliographystyle{amsplain}
 \bibliography{references.bib}
